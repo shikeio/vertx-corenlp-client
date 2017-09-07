@@ -1,0 +1,21 @@
+= Cheatsheets
+
+[[CoreNLPClientOptions]]
+== CoreNLPClientOptions
+
+++++
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[host]]`host`|`String`|-
+|[[password]]`password`|`String`|-
+|[[port]]`port`|`Number (int)`|-
+|[[ssl]]`ssl`|`Boolean`|-
+|[[sslKey]]`sslKey`|`String`|-
+|[[username]]`username`|`String`|-
+|===
+
