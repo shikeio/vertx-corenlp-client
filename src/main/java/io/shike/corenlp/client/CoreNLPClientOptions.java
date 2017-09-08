@@ -10,7 +10,7 @@ import io.vertx.core.json.JsonObject;
 public class CoreNLPClientOptions {
 
   private final String DEFAULT_HOST = "127.0.0.1";
-  private final int DEFAULT_PORT = 8080;
+  private final int DEFAULT_PORT = 80;
 
   private String host = DEFAULT_HOST;
   private int port = DEFAULT_PORT;

@@ -27,9 +27,9 @@ public class CoreNLPClientImpl implements CoreNLPClient {
   }
 
   @Override
-  public void annotate(JsonObject properties, String language, Handler<AsyncResult<JsonObject>> handler) {
-    buildRequest("/", properties, language)
-      .sendBuffer(Buffer.buffer("The quick brown fox jumped over the lazy dog."),
+  public void annotate(RequestParameters parameters, Handler<AsyncResult<JsonObject>> handler) {
+    buildRequest("/", parameters)
+      .sendBuffer(Buffer.buffer(parameters.getText()),
                   h -> {
                     if (h.succeeded()) {
                       handler.handle(Future.succeededFuture(h.result().body()));
@@ -40,8 +40,8 @@ public class CoreNLPClientImpl implements CoreNLPClient {
   }
 
   @Override
-  public void tokensregex(JsonObject properties, String language, Handler<AsyncResult<JsonObject>> handler) {
-    buildRequest("/tokensregex", properties, language).send(h -> {
+  public void tokensregex(RequestParameters parameters, Handler<AsyncResult<JsonObject>> handler) {
+    buildRequest("/tokensregex", parameters).send(h -> {
       if (h.succeeded()) {
         handler.handle(Future.succeededFuture(h.result().body()));
       } else {
@@ -51,25 +51,30 @@ public class CoreNLPClientImpl implements CoreNLPClient {
   }
 
   @Override
-  public void semgrex(JsonObject properties, String language, Handler<AsyncResult<JsonObject>> handler) {
-    buildRequest("/semgrex", properties, language).send(h -> {
-      if (h.succeeded()) {
-        handler.handle(Future.succeededFuture(h.result().body()));
-      } else {
-        handler.handle(Future.failedFuture(h.cause()));
-      }
-    });
+  public void semgrex(RequestParameters parameters, Handler<AsyncResult<JsonObject>> handler) {
+    buildRequest("/semgrex", parameters)
+      .send(h -> {
+        if (h.succeeded()) {
+          handler.handle(Future.succeededFuture(h.result().body()));
+        } else {
+          handler.handle(Future.failedFuture(h.cause()));
+        }
+      });
   }
 
-  private HttpRequest<JsonObject> buildRequest(String requestURI, JsonObject properties, String language) {
+  private HttpRequest<JsonObject> buildRequest(String requestURI, RequestParameters parameters) {
     HttpRequest<JsonObject> request = client.post(requestURI)
                                             .as(BodyCodec.jsonObject())
                                             .putHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8")
-                                            .setQueryParam("properties", properties.toString())
-                                            .setQueryParam("pipelineLanguage", language);
+                                            .setQueryParam("properties", parameters.getProperties().toString())
+                                            .setQueryParam("pipelineLanguage", parameters.getLanguage().name());
     if (options.getUsername() != null && options.getPassword() != null) {
       request.putHeader("Authorization",
                         "Basic " + Base64.getEncoder().encodeToString(String.join(":", options.getUsername(), options.getPassword()).getBytes()));
+    }
+    if (parameters.getPattern() != null) {
+      request.setQueryParam("pattern", parameters.getPattern())
+             .setQueryParam("filter", String.valueOf(parameters.isFilter()));
     }
     return request;
   }

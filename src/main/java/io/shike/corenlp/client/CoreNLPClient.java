@@ -14,10 +14,10 @@ public interface CoreNLPClient {
     return new CoreNLPClientImpl(vertx, options);
   }
 
-  void annotate(JsonObject properties, String language, Handler<AsyncResult<JsonObject>> handler);
+  void annotate(RequestParameters parameters, Handler<AsyncResult<JsonObject>> handler);
 
-  void tokensregex(JsonObject properties, String language, Handler<AsyncResult<JsonObject>> handler);
+  void tokensregex(RequestParameters parameters, Handler<AsyncResult<JsonObject>> handler);
 
-  void semgrex(JsonObject properties, String language, Handler<AsyncResult<JsonObject>> handler);
+  void semgrex(RequestParameters parameters, Handler<AsyncResult<JsonObject>> handler);
 
 }

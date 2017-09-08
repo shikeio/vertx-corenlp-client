@@ -5,8 +5,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Arrays;
+
 import io.vertx.core.Vertx;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
@@ -23,7 +24,7 @@ public class CoreNLPClientTest {
   @BeforeClass
   public static void beforeClass() {
     vertx = Vertx.vertx();
-    client = CoreNLPClient.create(vertx, new CoreNLPClientOptions().setHost("106.14.17.187"));
+    client = CoreNLPClient.create(vertx, new CoreNLPClientOptions().setHost("corenlp.run").setPort(80));
   }
 
   @AfterClass
@@ -34,12 +35,15 @@ public class CoreNLPClientTest {
   @Test
   public void annotate(TestContext ctx) throws Exception {
     Async async = ctx.async();
-    client.annotate(new JsonObject().put("annotators", "tokenize,ssplit,pos,ner,depparse,openie"), "en", event -> {
-      if (event.succeeded()) {
-        System.out.println(event.result());
-      }
-      async.complete();
-    });
+    client.annotate(new RequestParameters()
+                      .setAnnotators(Arrays.asList("tokenize,ssplit,pos,ner,depparse,openie".split(",")))
+                      .setText("Vert.x created by Tim Fox, maintain by Julien Viet"),
+                    event -> {
+                      if (event.succeeded()) {
+                        System.out.println(event.result());
+                      }
+                      async.complete();
+                    });
     async.await();
   }
 

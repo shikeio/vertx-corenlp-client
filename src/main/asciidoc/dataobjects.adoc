@@ -19,3 +19,21 @@
 |[[username]]`username`|`String`|-
 |===
 
+[[RequestParameters]]
+== RequestParameters
+
+++++
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[filter]]`filter`|`Boolean`|-
+|[[language]]`language`|`link:enums.html#Language[Language]`|-
+|[[pattern]]`pattern`|`String`|-
+|[[properties]]`properties`|`Json object`|-
+|[[text]]`text`|`String`|-
+|===
+
