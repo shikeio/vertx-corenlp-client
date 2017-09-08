@@ -1,6 +1,7 @@
 package io.shike.corenlp.client;
 
 import java.util.Base64;
+import java.util.Objects;
 
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -41,19 +42,22 @@ public class CoreNLPClientImpl implements CoreNLPClient {
 
   @Override
   public void tokensregex(RequestParameters parameters, Handler<AsyncResult<JsonObject>> handler) {
-    buildRequest("/tokensregex", parameters).send(h -> {
-      if (h.succeeded()) {
-        handler.handle(Future.succeededFuture(h.result().body()));
-      } else {
-        handler.handle(Future.failedFuture(h.cause()));
-      }
-    });
+    Objects.requireNonNull(parameters.getPattern(), "pattern must have a value");
+    buildRequest("/tokensregex", parameters)
+      .sendBuffer(Buffer.buffer(parameters.getText()), h -> {
+        if (h.succeeded()) {
+          handler.handle(Future.succeededFuture(h.result().body()));
+        } else {
+          handler.handle(Future.failedFuture(h.cause()));
+        }
+      });
   }
 
   @Override
   public void semgrex(RequestParameters parameters, Handler<AsyncResult<JsonObject>> handler) {
+    Objects.requireNonNull(parameters.getPattern(), "pattern must have a value");
     buildRequest("/semgrex", parameters)
-      .send(h -> {
+      .sendBuffer(Buffer.buffer(parameters.getText()), h -> {
         if (h.succeeded()) {
           handler.handle(Future.succeededFuture(h.result().body()));
         } else {

@@ -9,6 +9,7 @@ repositories {
 
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'maven'
 
 //sourceCompatibility = 1.8
 //targetCompatibility = 1.8
@@ -51,3 +52,17 @@ sourceSets {
 task wrapper(type: Wrapper) {
   gradleVersion = '3.3'
 }
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "http://127.0.0.1") {
+        authentication(userName: "root", password: "root")
+      }
+      pom.version = version.toString().replace("-SNAPSHOT", "")
+      pom.artifactId = project.name
+      pom.groupId = 'io.shike'
+    }
+  }
+}
+

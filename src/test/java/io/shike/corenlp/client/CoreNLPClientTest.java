@@ -40,7 +40,7 @@ public class CoreNLPClientTest {
                       .setText("Vert.x created by Tim Fox, maintain by Julien Viet"),
                     event -> {
                       if (event.succeeded()) {
-                        System.out.println(event.result());
+                        ctx.assertFalse(event.result().isEmpty());
                       }
                       async.complete();
                     });
@@ -48,11 +48,35 @@ public class CoreNLPClientTest {
   }
 
   @Test
-  public void tokensregex() throws Exception {
+  public void tokensregex(TestContext ctx) throws Exception {
+    Async async = ctx.async();
+    client.tokensregex(new RequestParameters()
+                         .setAnnotators(Arrays.asList("tokenize,ssplit,pos,ner,depparse,openie".split(",")))
+                         .setPattern("[ner: PERSON]")
+                         .setText("Vert.x created by Tim Fox, maintain by Julien Viet"),
+                       event -> {
+                         if (event.succeeded()) {
+                           ctx.assertFalse(event.result().isEmpty());
+                         }
+                         async.complete();
+                       });
+    async.await();
   }
 
   @Test
-  public void semgrex() throws Exception {
+  public void semgrex(TestContext ctx) throws Exception {
+    Async async = ctx.async();
+    client.semgrex(new RequestParameters()
+                     .setAnnotators(Arrays.asList("tokenize,ssplit,pos,ner,depparse,openie".split(",")))
+                     .setPattern("{}=A <<nsubj {}=B")
+                     .setText("Vert.x created by Tim Fox, maintain by Julien Viet"),
+                   event -> {
+                     if (event.succeeded()) {
+                       ctx.assertFalse(event.result().isEmpty());
+                     }
+                     async.complete();
+                   });
+    async.await();
   }
 
 }
