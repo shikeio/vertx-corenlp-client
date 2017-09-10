@@ -24,6 +24,7 @@ public class CoreNLPClientTest {
   @BeforeClass
   public static void beforeClass() {
     vertx = Vertx.vertx();
+    // Be case, only use corenlp.run for test
     client = CoreNLPClient.create(vertx, new CoreNLPClientOptions().setHost("corenlp.run").setPort(80));
   }
 
