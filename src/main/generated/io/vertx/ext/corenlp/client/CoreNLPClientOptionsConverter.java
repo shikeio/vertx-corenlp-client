@@ -14,14 +14,14 @@
  * under the License.
  */
 
-package io.shike.corenlp.client;
+package io.vertx.ext.corenlp.client;
 
 import io.vertx.core.json.JsonObject;
 
 /**
- * Converter for {@link io.shike.corenlp.client.CoreNLPClientOptions}.
+ * Converter for {@link CoreNLPClientOptions}.
  *
- * NOTE: This class has been automatically generated from the {@link io.shike.corenlp.client.CoreNLPClientOptions} original class using Vert.x codegen.
+ * NOTE: This class has been automatically generated from the {@link CoreNLPClientOptions} original class using Vert.x codegen.
  */
 public class CoreNLPClientOptionsConverter {
 

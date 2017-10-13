@@ -1,4 +1,4 @@
-package io.shike.corenlp.client;
+package io.vertx.ext.corenlp.client;
 
 import io.vertx.codegen.annotations.DataObject;
 import io.vertx.core.json.JsonObject;

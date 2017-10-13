@@ -1,4 +1,4 @@
-package io.shike.corenlp.client;
+package io.vertx.ext.corenlp.client;
 
 import java.util.Base64;
 import java.util.Objects;

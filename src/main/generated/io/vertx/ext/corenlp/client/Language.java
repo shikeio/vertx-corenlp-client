@@ -1,4 +1,4 @@
-package io.shike.corenlp.client;
+package io.vertx.ext.corenlp.client;
 
 /**
  * @author Ranger Tsao(https://github.com/boliza)

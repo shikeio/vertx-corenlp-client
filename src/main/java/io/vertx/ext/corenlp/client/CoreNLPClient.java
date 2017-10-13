@@ -1,4 +1,4 @@
-package io.shike.corenlp.client;
+package io.vertx.ext.corenlp.client;
 
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;

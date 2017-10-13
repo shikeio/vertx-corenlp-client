@@ -1,4 +1,4 @@
-package io.shike.corenlp.client;
+package io.vertx.ext.corenlp.client;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

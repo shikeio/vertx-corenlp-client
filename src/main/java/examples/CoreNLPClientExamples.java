@@ -2,10 +2,10 @@ package examples;
 
 import java.util.Arrays;
 
-import io.shike.corenlp.client.CoreNLPClient;
-import io.shike.corenlp.client.CoreNLPClientOptions;
-import io.shike.corenlp.client.RequestParameters;
 import io.vertx.core.Vertx;
+import io.vertx.ext.corenlp.client.CoreNLPClient;
+import io.vertx.ext.corenlp.client.CoreNLPClientOptions;
+import io.vertx.ext.corenlp.client.RequestParameters;
 
 /**
  * @author Ranger Tsao(https://github.com/boliza)

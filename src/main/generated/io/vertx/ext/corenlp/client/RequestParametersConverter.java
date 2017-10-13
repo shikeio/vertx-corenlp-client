@@ -14,14 +14,14 @@
  * under the License.
  */
 
-package io.shike.corenlp.client;
+package io.vertx.ext.corenlp.client;
 
 import io.vertx.core.json.JsonObject;
 
 /**
- * Converter for {@link io.shike.corenlp.client.RequestParameters}.
+ * Converter for {@link RequestParameters}.
  *
- * NOTE: This class has been automatically generated from the {@link io.shike.corenlp.client.RequestParameters} original class using Vert.x codegen.
+ * NOTE: This class has been automatically generated from the {@link RequestParameters} original class using Vert.x codegen.
  */
 public class RequestParametersConverter {
 
@@ -30,7 +30,7 @@ public class RequestParametersConverter {
       obj.setFilter((Boolean) json.getValue("filter"));
     }
     if (json.getValue("language") instanceof String) {
-      obj.setLanguage(io.shike.corenlp.client.Language.valueOf((String) json.getValue("language")));
+      obj.setLanguage(Language.valueOf((String) json.getValue("language")));
     }
     if (json.getValue("pattern") instanceof String) {
       obj.setPattern((String) json.getValue("pattern"));
